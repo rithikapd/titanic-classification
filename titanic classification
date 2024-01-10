@@ -16,6 +16,13 @@ training.info()
 
 training.describe()
 
+df_num = training[['Age','SibSp','Parch','Fare']]
+df_cat = training[['Survived','Pclass','Sex','Ticket','Cabin','Embarked']]
+for i in df_num.columns:
+    plt.hist(df_num[i])
+    plt.title(i)
+    plt.show()
+
 sns.heatmap(df_num.corr())
 
 pd.pivot_table(training, index = 'Survived', values = ['Age','SibSp','Parch','Fare'])
@@ -32,10 +39,8 @@ print(pd.pivot_table(training, index = 'Survived', columns = 'Embarked',
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Assuming df_cat is your DataFrame
-
 for i in df_cat.columns:
-    plt.figure()  # Create a new figure for each plot
+    plt.figure()
     sns.barplot(x=df_cat[i].value_counts().index, y=df_cat[i].value_counts())
     plt.title(i)
     plt.show()
